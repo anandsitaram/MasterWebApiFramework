@@ -19,12 +19,12 @@ public class BaseWebTest {
     @BeforeSuite
     public void beforeSuite() {
         ExtentReport.setUpReport();
-        /*try {
+       try {
             //TODO handle empty file
             FileUtils.cleanDirectory(new File(FrameworkConstants.SCREENSHOT_PATH));
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }*/
+        }
     }
 
     @AfterSuite
