@@ -1,0 +1,162 @@
+{
+  "motorCycle": {
+    "vehicleData": {
+      "make": "BMW",
+      "model": "Motorcycle",
+      "cylinderCap": "666",
+      "engPerformance": "777",
+      "dateOfManfct": "05/03/2022",
+      "noOfSeats": "2",
+      "lstPrice": "1234",
+      "annMilage": "230"
+    },
+    "insurantData": {
+      "firstName": "QA",
+      "lastName": "Testing",
+      "dateOfBirth": "05/03/1991",
+      "gender": "male",
+      "streetAddress": "JP Nagar",
+      "country": "India",
+      "zipcode": 567899,
+      "city": "Bengaluru",
+      "occupation": "Employee",
+      "Hobbies": "Speeding"
+    },
+    "productData": {
+      "startDate": "07/26/2023",
+      "insuranceSum": "3.000.000,00",
+      "damageInsurance": "No Coverage",
+      "OptionalProducts": "Euro Protection"
+    },
+    "selectPrice": {
+      "priceOption": "gold"
+    },
+    "sendQuote": {
+      "email": "test@gmail.com",
+      "phone": "9999999999",
+      "userName": "QaTest123",
+      "password": "VGVzdDEyMzU2Nw=="
+    }
+  },
+  "truck": {
+    "vehicleData": {
+      "make": "Opel",
+      "engPerformance": "876",
+      "dateOfManfct": "09/07/2022",
+      "noOfSeats": "8",
+      "fuelType": "Gas",
+      "payLoad": "60",
+      "totalWeight": "345",
+      "lstPrice": "7555",
+      "annMilage": "8777"
+    },
+    "insurantData": {
+      "firstName": "James",
+      "lastName": "Adams",
+      "dateOfBirth": "12/12/1985",
+      "gender": "male",
+      "streetAddress": "Austin",
+      "country": "United States",
+      "zipcode": 560086,
+      "city": "Texas",
+      "occupation": "Public Official",
+      "Hobbies": "Skydiving"
+    },
+    "productData": {
+      "startDate": "07/26/2023",
+      "insuranceSum": "5.000.000,00",
+      "damageInsurance": "Full Coverage",
+      "OptionalProducts": "Legal Defense Insurance"
+    },
+    "selectPrice": {
+      "priceOption": "silver"
+    },
+    "sendQuote": {
+      "email": "qatest@gmail.com",
+      "phone": "8899999999",
+      "userName": "QaTest183",
+      "password": "VGVzdDY3ODk="
+    }
+  },
+  "camper": {
+    "vehicleData": {
+      "make": "Porsche",
+      "engPerformance": "400",
+      "dateOfManfct": "03/01/2023",
+      "noOfSeats": "5",
+      "righthand": "yes",
+      "fuelType": "Petrol",
+      "payLoad": "80",
+      "totalWeight": "342",
+      "lstPrice": "87094",
+      "annMilage": "6783"
+    },
+    "insurantData": {
+      "firstName": "Robert",
+      "lastName": "Evans",
+      "dateOfBirth": "07/03/1991",
+      "gender": "male",
+      "streetAddress": "Mashcutere",
+      "country": "United Kingdom",
+      "zipcode": 678999,
+      "city": "London",
+      "occupation": "Unemployed",
+      "Hobbies": "Cliff Diving"
+    },
+    "productData": {
+      "startDate": "07/26/2023",
+      "insuranceSum": "7.000.000,00",
+      "damageInsurance": "Partial Coverage",
+      "OptionalProducts": "Euro Protection"
+    },
+    "selectPrice": {
+      "priceOption": "ultimate"
+    },
+    "sendQuote": {
+      "email": "robert@gmail.com",
+      "phone": "6789999999",
+      "userName": "QaTest883",
+      "password": "VGVzdDk5MzU2Nw=="
+    }
+  },
+  "automobile": {
+    "vehicleData": {
+      "make": "Suzuki",
+      "engPerformance": "150",
+      "dateOfManfct": "07/10/2022",
+      "noOfSeats": "2",
+      "fuelType": "Electric Power",
+      "lstPrice": "15000",
+      "annMilage": "567"
+    },
+    "insurantData": {
+      "firstName": "Alan",
+      "lastName": "williams",
+      "dateOfBirth": "05/03/1987",
+      "gender": "female",
+      "streetAddress": "Dockerlands",
+      "country": "Australia",
+      "zipcode": 560086,
+      "city": "Melbourne",
+      "occupation": "Selfemployed",
+      "Hobbies": "Bungee Jumping"
+    },
+    "productData": {
+      "startDate": "07/26/2023",
+      "insuranceSum": "10.000.000,00",
+      "meritRating": "Malus 15",
+      "damageInsurance": "Full Coverage",
+      "courtesyCar": "Yes",
+      "OptionalProducts": "Euro Protection"
+    },
+    "selectPrice": {
+      "priceOption": "platinum"
+    },
+    "sendQuote": {
+      "email": "qatestt@gmail.com",
+      "phone": "8899977999",
+      "userName": "QaTest761",
+      "password": "VGVzdDg4ODk="
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+
+  "testPost": {
+    "city": "Bangalore",
+    "country": "India",
+    "id": 4,
+    "name": "QA"
+  },
+  "testPut" : {
+    "city": "Mysore",
+    "country": "India",
+    "id": 4,
+    "name": "QA"
+  }
+}
