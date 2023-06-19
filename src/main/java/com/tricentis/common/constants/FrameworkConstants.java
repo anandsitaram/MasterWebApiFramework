@@ -1,21 +1,20 @@
 package com.tricentis.common.constants;
 
-public interface FrameworkConstants {
+public final class FrameworkConstants {
 
-    String TEST_RESOURCE_PATH=System.getProperty("user.dir")+"/src/test/resources";
+    private FrameworkConstants() {
 
-    String PROPERTY_PATH=TEST_RESOURCE_PATH+"/config.properties";
+    }
 
-    String EXTENTREPORT_PATH=System.getProperty("user.dir")+"/Reports/";
+    public static final String USERDIR = System.getProperty("user.dir");
+    public static final String TEST_RESOURCE_PATH = USERDIR + "/src/test/resources";
+    public static final String TESTDATA_PATH = TEST_RESOURCE_PATH + "/testdata";
 
-    String SCREENSHOT_PATH=System.getProperty("user.dir")+"/Screenshots/";
+    public static final String PROPERTY_PATH = TEST_RESOURCE_PATH + "/config.properties";
 
-    String WEB_TESTDATA_FILE="web-test-data";
+    public static final String EXTENTREPORT_PATH = USERDIR + "/Reports/";
 
-    String API_TESTDATA_FILE="api-test-data";
-    String WEB_TESTDATA_PATH=TEST_RESOURCE_PATH+"/"+WEB_TESTDATA_FILE+".json";
-
-    String API_TESTDATA_PATH=TEST_RESOURCE_PATH+"/"+API_TESTDATA_FILE+".json";
+    public static final String SCREENSHOT_PATH = USERDIR + "/Screenshots/";
 
 
 }

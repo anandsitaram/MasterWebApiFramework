@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 
 public class SendQuotePage extends HomePage {
 
-    public SendQuotePage(){
+    public SendQuotePage() {
         SeleniumHelper.waitForPageLoad(this.getClass().getSimpleName());
 
     }
@@ -25,62 +25,63 @@ public class SendQuotePage extends HomePage {
 
     private By confimBtn = By.xpath("//button[@class='confirm']");
 
-    private By spinner =By.id("LoadingPDF");
+    private By spinner = By.id("LoadingPDF");
 
-    private By headerTxt =By.id("sendQuoteForm");
+    private By headerTxt = By.id("sendQuoteForm");
 
-    private By successMsgTxt =By.xpath("//h2");
+    private By successMsgTxt = By.xpath("//h2");
 
-    private By confirmMailPopUp =By.xpath("//div[@class='sweet-alert showSweetAlert visible']");
+    private By confirmMailPopUp = By.xpath("//div[@class='sweet-alert showSweetAlert visible']");
 
-    public boolean isSendQuotePageDisplayed(){
+    public boolean isSendQuotePageDisplayed() {
         return SeleniumHelper.isElementDisplayed(headerTxt);
     }
 
-    public boolean isConfirmMailPopUpDisplayed(){
+    public boolean isConfirmMailPopUpDisplayed() {
         return SeleniumHelper.isElementDisplayed(confirmMailPopUp);
     }
 
-    public SendQuotePage enterEmail(String email){
-        SeleniumHelper.sendKeys(emailTxtBx,email,email+" text is entered in email field");
+    public SendQuotePage enterEmail(String email) {
+        SeleniumHelper.sendKeys(emailTxtBx, email, email + " text is entered in email field");
         return this;
     }
 
-    public String getSuccessMsgTxt(){
-        return SeleniumHelper.getText(successMsgTxt,"Confirm Mail is displayed");
+    public String getSuccessMsgTxt() {
+        return SeleniumHelper.getText(successMsgTxt, "Confirm Mail is displayed");
     }
-    public SendQuotePage enterPhoneNo(String phone){
-        SeleniumHelper.sendKeys(phoneTxtBx,phone,phone+" text is entered in phone field");
+
+    public SendQuotePage enterPhoneNo(String phone) {
+        SeleniumHelper.sendKeys(phoneTxtBx, phone, phone + " text is entered in phone field");
         return this;
     }
 
-    public SendQuotePage enterUserName(String username){
-        SeleniumHelper.sendKeys(userNameTxtBx,username,username+" text is entered in username field");
+    public SendQuotePage enterUserName(String username) {
+        SeleniumHelper.sendKeys(userNameTxtBx, username, username + " text is entered in username field");
         return this;
     }
 
-    public SendQuotePage enterPassowrd(String password){
-        SeleniumHelper.sendKeys(passwordTxtBx, EncryptUtil.getDecryptedValue(password),password+" encrypted text is entered in password field");
+    public SendQuotePage enterPassowrd(String password) {
+        SeleniumHelper.sendKeys(passwordTxtBx, EncryptUtil.getDecryptedValue(password), password + " encrypted text is entered in password field");
         return this;
     }
 
-    public SendQuotePage enterConfirmPassowrd(String confirmPwd){
-        SeleniumHelper.sendKeys(confirmPasswordTxtBx, EncryptUtil.getDecryptedValue(confirmPwd),confirmPwd+" encrypted text is entered in confirm password field");
+    public SendQuotePage enterConfirmPassowrd(String confirmPwd) {
+        SeleniumHelper.sendKeys(confirmPasswordTxtBx, EncryptUtil.getDecryptedValue(confirmPwd), confirmPwd + " encrypted text is entered in confirm password field");
         return this;
     }
 
-    public SendQuotePage clickMailBtn( ){
-        SeleniumHelper.click(sendMailBtn,"Mail Button is clicked");
+    public SendQuotePage clickMailBtn() {
+        SeleniumHelper.click(sendMailBtn, "Mail Button is clicked");
         return this;
     }
 
-    public SendQuotePage waitForSpinnerToDisappear(){
-        SeleniumHelper.waitUntilIsInvisible(spinner,"Waiting for spinner to disappear");
-        return  this;
+    public SendQuotePage waitForSpinnerToDisappear() {
+        SeleniumHelper.waitUntilIsInvisible(spinner, "Waiting for spinner to disappear");
+        return this;
     }
 
-    public SendQuotePage clickConfrimBtn( ){
-        SeleniumHelper.click(confimBtn," Confirm button is clicked");
+    public SendQuotePage clickConfrimBtn() {
+        SeleniumHelper.click(confimBtn, " Confirm button is clicked");
         return this;
     }
 }

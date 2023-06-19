@@ -1,8 +1,9 @@
 package com.tricentis.web.utils;
 
-import com.tricentis.common.reports.ExtentLogger;
 import com.tricentis.common.utils.ConfigReader;
+import com.tricentis.common.utils.LogUtil;
 import com.tricentis.web.drivers.DriverInstance;
+import com.tricentis.web.reports.ExtentWebLogger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -14,8 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public final class SeleniumHelper {
-
-    private SeleniumHelper(){
+    private SeleniumHelper() {
 
     }
 
@@ -27,7 +27,9 @@ public final class SeleniumHelper {
     public static boolean isElementDisplayed(By by) {
         WebElement element = waitUntilIsVisible(by);
         return element.isDisplayed();
+
     }
+
     public static void waitUntilIsPresent(By by) {
         WebDriverWait webDriverWait = new WebDriverWait(DriverInstance.getDriver(), Duration.ofSeconds(ConfigReader.getTimeOutValue()));
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(by));
@@ -38,58 +40,70 @@ public final class SeleniumHelper {
         return webDriverWait.until(ExpectedConditions.elementToBeClickable(by));
     }
 
-    public static void waitUntilIsInvisible(By by,String message) {
+    public static void waitUntilIsInvisible(By by, String message) {
         WebDriverWait webDriverWait = new WebDriverWait(DriverInstance.getDriver(), Duration.ofSeconds(ConfigReader.getTimeOutValue()));
         webDriverWait.until(ExpectedConditions.invisibilityOfElementLocated(by));
-        ExtentLogger.pass(message);
+        LogUtil.log().info(message);
+        ExtentWebLogger.pass(message);
 
     }
 
-    public static void sendKeys(By by, String text){
+    public static void sendKeys(By by, String text) {
         WebElement element = waitUntilIsVisible(by);
         element.sendKeys(text);
-        ExtentLogger.pass(text+ " is entered");
-    }
-    public static void sendKeys(By by, String text,String message){
-        WebElement element = waitUntilIsVisible(by);
-        element.sendKeys(text);
-        ExtentLogger.pass(message);
+        ExtentWebLogger.pass(text + " is entered");
     }
 
-    public static String getText(By by,String message){
+    public static void sendKeys(By by, String text, String message) {
         WebElement element = waitUntilIsVisible(by);
-        String txt=element.getText();
-        ExtentLogger.pass(message);
+        element.sendKeys(text);
+        LogUtil.log().info(message);
+        ExtentWebLogger.pass(message);
+
+
+    }
+
+    public static String getText(By by, String message) {
+        WebElement element = waitUntilIsVisible(by);
+        String txt = element.getText();
+        LogUtil.log().info(message);
+        ExtentWebLogger.pass(message);
         return txt;
     }
-    public static void click(By by){
+
+    public static void click(By by) {
         WebElement element = waitUntilIsClickable(by);
         element.click();
-        ExtentLogger.pass(by.toString()+ " is clicked");
-    }
-    public static void click(By by,String message){
-        WebElement element = waitUntilIsClickable(by);
-        element.click();
-        ExtentLogger.pass(message);
+        ExtentWebLogger.pass(by.toString() + " is clicked");
     }
 
-    public static void jsClick(By by){
+    public static void click(By by, String message) {
+        WebElement element = waitUntilIsClickable(by);
+        element.click();
+        LogUtil.log().info(message);
+        ExtentWebLogger.pass(message);
+    }
+
+    public static void jsClick(By by) {
         WebElement element = waitUntilIsClickable(by);
         ((JavascriptExecutor) DriverInstance.getDriver()).executeScript("arguments[0].click()", element);
 
     }
 
-    public static void jsClick(By by,String message){
+    public static void jsClick(By by, String message) {
         WebElement element = waitUntilIsClickable(by);
         ((JavascriptExecutor) DriverInstance.getDriver()).executeScript("arguments[0].click()", element);
-        ExtentLogger.pass(message);
+        LogUtil.log().info(message);
+        ExtentWebLogger.pass(message);
 
     }
-    public static void waitForPageLoad(String className){
+
+    public static void waitForPageLoad(String className) {
         WebDriverWait webDriverWait = new WebDriverWait(DriverInstance.getDriver(), Duration.ofSeconds(ConfigReader.getTimeOutValue()));
         webDriverWait.until((ExpectedCondition<Boolean>) driver ->
                 ((JavascriptExecutor) DriverInstance.getDriver()).executeScript("return document.readyState").equals("complete"));
-        ExtentLogger.pass(className+" is loaded successfully");
+        LogUtil.log().info(className+" is loaded successfully");
+        ExtentWebLogger.pass(className + " is loaded successfully");
 
     }
 
@@ -97,7 +111,7 @@ public final class SeleniumHelper {
         WebElement element = waitUntilIsVisible(by);
         Select select = new Select(element);
         select.selectByVisibleText(value);
-        ExtentLogger.pass(value+ " is selected from dropdown");
+        ExtentWebLogger.pass(value + " is selected from dropdown");
 
 
     }
@@ -106,11 +120,11 @@ public final class SeleniumHelper {
         WebElement element = waitUntilIsVisible(by);
         Select select = new Select(element);
         select.selectByVisibleText(value);
-        ExtentLogger.pass(message);
+        LogUtil.log().info(message);
+        ExtentWebLogger.pass(message);
 
 
     }
-
 
 
 }
