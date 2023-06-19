@@ -49,7 +49,7 @@ public class BaseWebTest {
         DriverInstance.initDriver(DRIVERTYPE.valueOf(browser.toUpperCase()));
         DriverInstance.getDriver().get(ConfigReader.getApplicationUrl());
         DriverInstance.getDriver().manage().window().maximize();
-        ExtentWebLogger.info(ConfigReader.getApplicationUrl() + " URL is launched in " + browser + " in browser");
+        ExtentWebLogger.info(ConfigReader.getApplicationUrl() + " URL is launched in " + browser + " browser");
 
 
     }

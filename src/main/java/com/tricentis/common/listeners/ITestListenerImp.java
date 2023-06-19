@@ -8,7 +8,9 @@ import org.testng.ITestResult;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ITestListenerImp implements ITestListener, IExecutionListener {
     private static List<List<String>> list2d = new ArrayList<>();
@@ -32,7 +34,7 @@ public class ITestListenerImp implements ITestListener, IExecutionListener {
     }
 
 
-    private void addResult(ITestResult result) {
+    private synchronized void addResult(ITestResult result) {
         String[] val = new String[3];
         val[0] = result.getMethod().getMethodName();
 
@@ -43,7 +45,7 @@ public class ITestListenerImp implements ITestListener, IExecutionListener {
         } else if (result.getStatus() == ITestResult.SKIP) {
             val[1] = "SKIPPED";
         }
-        val[2] = DateUtils.getDefaultDateTime();
+        val[2] = DateUtils.getFormattedDate(result.getTestContext().getStartDate());
          list2d.add(Arrays.asList(val));
     }
 

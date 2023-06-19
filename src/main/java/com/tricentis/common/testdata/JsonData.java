@@ -23,7 +23,7 @@ public final class JsonData {
     private static JSONParser jsonParser = new JSONParser();
 
 
-    public static Map<String, Map<String, String>> readTestData(String keyValue) {
+    public synchronized static Map<String, Map<String, String>> readTestData(String keyValue) {
 
         try {
             Object obj = jsonParser.parse(new FileReader(FrameworkConstants.TESTDATA_PATH + File.separator + ConfigReader.getJsonDataFile() + ".json"));
