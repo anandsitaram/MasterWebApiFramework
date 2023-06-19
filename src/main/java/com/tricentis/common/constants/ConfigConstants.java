@@ -1,22 +1,33 @@
 package com.tricentis.common.constants;
 
-public interface ConfigConstants {
+public final class ConfigConstants {
 
-     String APPLICATION_URL="application_url";
-    String BROWSER="browser";
-    String TIMEOUT="timeout";
-    String PASSEDSTEP_SCREENSHOT="passedStepScreenShot";
-    String FAILEDSTEP_SCREENSHOT="failedStepScreenShot";
+    private ConfigConstants() {
 
-    String PASSEDSTEP_LOGGER="passedStepLogger";
-    String FAILEDSTEP_LOGGER="failedStepLogger";
+    }
 
-    String OVERRIDE_REPORT="overrideReport";
+    public static final String APPLICATION_URL = "application_url";
+    public static final String BROWSER = "browser";
 
-    String VALIDATIONFAILED_SCREENSHOT="validationFailedScreenshot";
-    String VALIDATIONPASSED_SCREENSHOT="validationPassedScreenshot";
+    public static final String BROWSEROPTIONS = "browserOptions";
+    public static final String TIMEOUT = "timeout";
+    public static final String PASSEDSTEP_SCREENSHOT = "passedStepScreenShot";
+    public static final String FAILEDSTEP_SCREENSHOT = "failedStepScreenShot";
 
-    String BASEURI="baseUri";
+    public static final String PASSEDSTEP_LOGGER = "passedStepLogger";
+    public static final String FAILEDSTEP_LOGGER = "failedStepLogger";
+
+    public static final String OVERRIDE_REPORT = "overrideReport";
+
+    public static final String VALIDATIONFAILED_SCREENSHOT = "validationFailedScreenshot";
+    public static final String VALIDATIONPASSED_SCREENSHOT = "validationPassedScreenshot";
+
+    public static final String BASEURI = "baseUri";
+
+    public static final String ISSELENIUMNEW = "isSeleniumNewVersion";
 
 
+    public static final String JSONDATAFILE = "jsonDataFile";
+
+    public static final String CSVDATAFILE = "csvDataFile";
 }

@@ -1,7 +1,10 @@
 package com.tricentis.web.drivers;
 
-import org.openqa.selenium.chrome.ChromeDriver;
+import com.tricentis.common.utils.ConfigReader;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+
+import java.util.Objects;
 
 public class FirefoxDriverManager extends DriverManager {
 
@@ -10,8 +13,16 @@ public class FirefoxDriverManager extends DriverManager {
     }
 
     protected void createDriver() {
-        //TODO- Add Logic for Chrome options and chromedriver.exe path
-        driver = new FirefoxDriver();
+        String options = ConfigReader.getBrowserOptions();
+        if (Objects.nonNull(options)) {
+            FirefoxOptions firefoxOptions = new FirefoxOptions();
+            firefoxOptions.addArguments(options);
+            driver = new FirefoxDriver(firefoxOptions);
+
+        } else {
+            driver = new FirefoxDriver();
+
+        }
         DriverThLocal.setDriver(driver);
     }
 

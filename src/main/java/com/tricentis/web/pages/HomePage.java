@@ -1,10 +1,10 @@
 package com.tricentis.web.pages;
 
-public class HomePage extends BasePage{
+public class HomePage extends BasePage {
 
-    public HomePage(){
+    public HomePage() {
         super();
-        menuPage=new MenuPage();
+        menuPage = new MenuPage();
     }
 
     private MenuPage menuPage;
