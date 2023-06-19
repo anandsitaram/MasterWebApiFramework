@@ -12,8 +12,6 @@ import java.util.List;
 
 public class ITestListenerImp implements ITestListener, IExecutionListener {
     private static List<List<String>> list2d = new ArrayList<>();
-    private static String appType=null;
-
     @Override
     public void onTestFailure(ITestResult result) {
         addResult(result);

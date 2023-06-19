@@ -1,6 +1,7 @@
 package com.tricentis.common.utils;
 
 import com.tricentis.common.constants.FrameworkConstants;
+import com.tricentis.common.exceptions.FrameworkException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -32,8 +33,8 @@ public final class ExcelUtil {
             } else {
                 return new HSSFWorkbook(fileInputStream);
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch ( IOException e) {
+            throw new FrameworkException("Problem in initializing the workbook");
         }
     }
 
@@ -46,7 +47,7 @@ public final class ExcelUtil {
                 return new HSSFWorkbook();
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new FrameworkException("Problem in initializing the workbook");
         }
     }
 
@@ -61,7 +62,7 @@ public final class ExcelUtil {
             return getCellText(cell);
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new FrameworkException("Problem in getting the value from cell");
         }
     }
 
@@ -76,7 +77,7 @@ public final class ExcelUtil {
             return getCellText(cell);
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new FrameworkException("Problem in getting the value from cell");
         }
     }
 
@@ -100,7 +101,7 @@ public final class ExcelUtil {
                 }
             }
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new FrameworkException("File not found");
         }
 
         return retobj;
@@ -208,7 +209,7 @@ public final class ExcelUtil {
             workbook.close();
             fileOutputStream.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new FrameworkException("Problem in generating the report");
         }
 
     }

@@ -2,7 +2,6 @@ package com.api;
 
 import com.tricentis.common.reports.ExtentLogger;
 import com.tricentis.common.reports.ExtentReport;
-import com.tricentis.web.reports.ExtentWebLogger;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
