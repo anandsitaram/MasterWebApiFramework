@@ -1,13 +1,12 @@
 package com.api;
 
+import com.tricentis.common.listeners.ITestListenerImp;
 import com.tricentis.common.reports.ExtentLogger;
 import com.tricentis.common.reports.ExtentReport;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
+@Listeners({ITestListenerImp.class})
 public class BaseApiTest {
 
 
@@ -29,13 +28,6 @@ public class BaseApiTest {
 
     }
 
-    @AfterMethod
-    public void tearDown(ITestResult result) {
-        if (result.getStatus() == ITestResult.FAILURE) {
-            ExtentLogger.fail("Failed because of - " + result.getThrowable().getMessage());
-        }
-
-    }
 
 
 }

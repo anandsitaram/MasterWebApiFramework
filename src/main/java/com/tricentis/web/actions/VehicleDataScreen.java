@@ -27,7 +27,7 @@ public class VehicleDataScreen {
                 .enterListPrice(data.get(TestData.VEHICLE_DATA).get("lstPrice"))
                 .enterAnnualMilage(data.get(TestData.VEHICLE_DATA).get("annMilage"))
                 .goToInsurancePage();
-        ExtentLogger.info("All Fields are entered in Vehicle Data Page");
+        ExtentLogger.passStatus("All Fields are entered in Vehicle Data Page");
         return new InsurantDataScreen();
 
     }
@@ -43,7 +43,7 @@ public class VehicleDataScreen {
                 .enterListPrice(data.get(TestData.VEHICLE_DATA).get("lstPrice"))
                 .enterAnnualMilage(data.get(TestData.VEHICLE_DATA).get("annMilage"))
                 .goToInsurancePage();
-        ExtentLogger.info("All Fields are entered in Vehicle Data Page");
+        ExtentLogger.passStatus("All Fields are entered in Vehicle Data Page");
         return new InsurantDataScreen();
 
     }
@@ -60,7 +60,7 @@ public class VehicleDataScreen {
                 .enterListPrice(data.get(TestData.VEHICLE_DATA).get("lstPrice"))
                 .enterAnnualMilage(data.get(TestData.VEHICLE_DATA).get("annMilage"))
                 .goToInsurancePage();
-        ExtentLogger.info("All Fields are entered in Vehicle Data Page");
+        ExtentLogger.passStatus("All Fields are entered in Vehicle Data Page");
         return new InsurantDataScreen();
 
     }
@@ -74,7 +74,7 @@ public class VehicleDataScreen {
                 .enterListPrice(data.get(TestData.VEHICLE_DATA).get("lstPrice"))
                 .enterAnnualMilage(data.get(TestData.VEHICLE_DATA).get("annMilage"))
                 .goToInsurancePage();
-        ExtentLogger.info("All Fields are entered in Vehicle Data Page");
+        ExtentLogger.passStatus("All Fields are entered in Vehicle Data Page");
         return new InsurantDataScreen();
 
     }

@@ -20,7 +20,7 @@ public class PriceOptionScreen {
 
         enterPriceOptionPage.selectPriceOption(price)
                 .goToSendQuotePage();
-        ExtentLogger.info(price + "is selected in Enter Price Option page");
+        ExtentLogger.passStatus(price + " is selected in Enter Price Option page");
         return new SendQuoteScreen();
 
 

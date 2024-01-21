@@ -25,7 +25,7 @@ public class SendQuoteScreen {
                 .enterConfirmPassowrd(data.get(TestData.SENDQUOTE).get("password"))
                 .clickMailBtn()
                 .waitForSpinnerToDisappear();
-        ExtentLogger.info("All Fields are entered in Send Quote Page");
+        ExtentLogger.passStatus("All Fields are entered in Send Quote Page");
 
 
     }

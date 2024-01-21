@@ -1,9 +1,9 @@
 package com.tricentis.web.utils;
 
+import com.tricentis.common.reports.ExtentLogger;
 import com.tricentis.common.utils.ConfigReader;
 import com.tricentis.common.utils.LogUtil;
 import com.tricentis.web.drivers.DriverInstance;
-import com.tricentis.web.reports.ExtentWebLogger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -44,21 +44,21 @@ public final class SeleniumHelper {
         WebDriverWait webDriverWait = new WebDriverWait(DriverInstance.getDriver(), Duration.ofSeconds(ConfigReader.getTimeOutValue()));
         webDriverWait.until(ExpectedConditions.invisibilityOfElementLocated(by));
         LogUtil.log().info(message);
-        ExtentWebLogger.pass(message);
+        ExtentLogger.pass(message);
 
     }
 
     public static void sendKeys(By by, String text) {
         WebElement element = waitUntilIsVisible(by);
         element.sendKeys(text);
-        ExtentWebLogger.pass(text + " is entered");
+        ExtentLogger.pass(text + " is entered");
     }
 
     public static void sendKeys(By by, String text, String message) {
         WebElement element = waitUntilIsVisible(by);
         element.sendKeys(text);
         LogUtil.log().info(message);
-        ExtentWebLogger.pass(message);
+        ExtentLogger.pass(message);
 
 
     }
@@ -67,21 +67,21 @@ public final class SeleniumHelper {
         WebElement element = waitUntilIsVisible(by);
         String txt = element.getText();
         LogUtil.log().info(message);
-        ExtentWebLogger.pass(message);
+        ExtentLogger.pass(message);
         return txt;
     }
 
     public static void click(By by) {
         WebElement element = waitUntilIsClickable(by);
         element.click();
-        ExtentWebLogger.pass(by.toString() + " is clicked");
+        ExtentLogger.pass(by.toString() + " is clicked");
     }
 
     public static void click(By by, String message) {
         WebElement element = waitUntilIsClickable(by);
         element.click();
         LogUtil.log().info(message);
-        ExtentWebLogger.pass(message);
+        ExtentLogger.pass(message);
     }
 
     public static void jsClick(By by) {
@@ -94,7 +94,7 @@ public final class SeleniumHelper {
         WebElement element = waitUntilIsClickable(by);
         ((JavascriptExecutor) DriverInstance.getDriver()).executeScript("arguments[0].click()", element);
         LogUtil.log().info(message);
-        ExtentWebLogger.pass(message);
+        ExtentLogger.pass(message);
 
     }
 
@@ -103,7 +103,7 @@ public final class SeleniumHelper {
         webDriverWait.until((ExpectedCondition<Boolean>) driver ->
                 ((JavascriptExecutor) DriverInstance.getDriver()).executeScript("return document.readyState").equals("complete"));
         LogUtil.log().info(className+" is loaded successfully");
-        ExtentWebLogger.pass(className + " is loaded successfully");
+        ExtentLogger.pass(className + " is loaded successfully");
 
     }
 
@@ -111,7 +111,7 @@ public final class SeleniumHelper {
         WebElement element = waitUntilIsVisible(by);
         Select select = new Select(element);
         select.selectByVisibleText(value);
-        ExtentWebLogger.pass(value + " is selected from dropdown");
+        ExtentLogger.pass(value + " is selected from dropdown");
 
 
     }
@@ -121,7 +121,7 @@ public final class SeleniumHelper {
         Select select = new Select(element);
         select.selectByVisibleText(value);
         LogUtil.log().info(message);
-        ExtentWebLogger.pass(message);
+        ExtentLogger.pass(message);
 
 
     }

@@ -40,7 +40,7 @@ public final class ConfigUtil {
 
     }
 
-    static String getValue(String key) {
+     static String getValue(String key) {
 
         if (Objects.isNull(key) || Objects.isNull(CONFIGMAP.get(key))) {
             throw new ValueNotFoundException("Key not present in properties file");

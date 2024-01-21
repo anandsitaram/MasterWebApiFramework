@@ -34,7 +34,7 @@ public final class InsurantDataScreen {
                 .selectOccp(data.get(TestData.INSURANT_DATA).get("occupation"))
                 .selectHobbies(data.get(TestData.INSURANT_DATA).get("Hobbies"))
                 .goToProductDataPage();
-        ExtentLogger.info("All Fields are entered in Insurant Data Page");
+        ExtentLogger.passStatus("All Fields are entered in Insurant Data Page");
         return new ProductDataScreen();
 
 

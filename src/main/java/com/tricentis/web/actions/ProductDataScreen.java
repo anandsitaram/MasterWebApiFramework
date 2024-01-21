@@ -26,7 +26,7 @@ public class ProductDataScreen {
                 .enterDamageSum(data.get(TestData.PRODUCT_DATA).get("damageInsurance"))
                 .selectOptionalProducts(data.get(TestData.PRODUCT_DATA).get("OptionalProducts"))
                 .goToPriceOptionPage();
-        ExtentLogger.info("All Fields are entered in Product Data Page");
+        ExtentLogger.passStatus("All Fields are entered in Product Data Page");
         return new PriceOptionScreen();
 
 

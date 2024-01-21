@@ -30,4 +30,6 @@ public final class ConfigConstants {
     public static final String JSONDATAFILE = "jsonDataFile";
 
     public static final String CSVDATAFILE = "csvDataFile";
+
+    public static final String DISABLE_LOGGING = "disableLogging";
 }

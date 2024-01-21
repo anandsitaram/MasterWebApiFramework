@@ -8,7 +8,7 @@ public final class ExtentThLocal {
 
     }
 
-    private static ThreadLocal<ExtentTest> extentTestThreadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<ExtentTest> extentTestThreadLocal = new ThreadLocal<>();
 
     static ExtentTest getExtentTest() {
         return extentTestThreadLocal.get();

@@ -1,29 +1,31 @@
 package com.tricentis.common.listeners;
 
+import com.tricentis.common.reports.ExtentLogger;
+import com.tricentis.common.reports.ExtentReport;
 import com.tricentis.common.utils.DateUtils;
 import com.tricentis.common.utils.ExcelUtil;
-import org.testng.IExecutionListener;
+import com.tricentis.web.reports.ExtentWebLogger;
+import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-public class ITestListenerImp implements ITestListener, IExecutionListener {
+public class ITestListenerImp implements ITestListener {
     private static List<List<String>> list2d = new ArrayList<>();
     @Override
     public void onTestFailure(ITestResult result) {
         addResult(result);
+        ExtentLogger.failStatus("Test case is failed due to "+result.getThrowable().getMessage());
 
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
         addResult(result);
-
+        ExtentLogger.passStatus("Test case is passed");
     }
 
 
@@ -31,6 +33,7 @@ public class ITestListenerImp implements ITestListener, IExecutionListener {
     @Override
     public void onTestSkipped(ITestResult result) {
         addResult(result);
+        ExtentLogger.skipStatus("Test case is skipped because of "+result.getThrowable().getMessage());
     }
 
 
@@ -49,19 +52,26 @@ public class ITestListenerImp implements ITestListener, IExecutionListener {
          list2d.add(Arrays.asList(val));
     }
 
-    @Override
-    public void onExecutionStart() {
 
+
+
+    @Override
+    public void onStart(ITestContext context) {
         String[] headers = {"Test Case Name","Status", "Execution Time"};
         list2d.add(Arrays.asList(headers));
+        ExtentReport.setUpReport();
     }
 
     @Override
-    public void onExecutionFinish() {
+    public void onFinish(ITestContext context) {
+        ExtentReport.closeReport();
         Object[][] array2d;
         array2d = list2d.stream().map(x -> x.toArray(new String[x.size()])).toArray(String[][]::new);
         ExcelUtil.generateReport(array2d);
     }
+
+
+
 
 
 }

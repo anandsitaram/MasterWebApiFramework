@@ -68,6 +68,11 @@ public final class ConfigReader {
 
     }
 
+    public static boolean isLoggingDisabled() {
+
+        return getBooleanValue(ConfigConstants.DISABLE_LOGGING);
+
+    }
     public static String getBrowserOptions() {
         try {
             return ConfigUtil.getValue(ConfigConstants.BROWSEROPTIONS);
