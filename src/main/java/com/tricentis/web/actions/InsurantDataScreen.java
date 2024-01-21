@@ -1,6 +1,7 @@
 package com.tricentis.web.actions;
 
 import com.tricentis.common.reports.ExtentLogger;
+import com.tricentis.web.constants.TestData;
 import com.tricentis.web.pages.EnterInsurantDataPage;
 
 import java.util.Map;
@@ -8,37 +9,35 @@ import java.util.Map;
 public final class InsurantDataScreen {
 
 
-
     private EnterInsurantDataPage enterInsurantDataPage;
 
-    public InsurantDataScreen(){
+    public InsurantDataScreen() {
 
-        enterInsurantDataPage= new EnterInsurantDataPage();
+        enterInsurantDataPage = new EnterInsurantDataPage();
 
     }
 
     public EnterInsurantDataPage getEnterInsurantDataPage() {
         return enterInsurantDataPage;
     }
-    public ProductDataScreen populateAllDetailsForMotorCycle(Map<String, Map<String, String>> data){
 
-        enterInsurantDataPage.enterFirstName(data.get("insurantData").get("firstName"))
-                .enterLastName(data.get("insurantData").get("lastName"))
-                .enterDob(data.get("insurantData").get("dateOfBirth"))
-                .checkGenderBtn(data.get("insurantData").get("gender"))
-                .enterStreetAddrs(data.get("insurantData").get("streetAddress"))
-                .selectCountry(data.get("insurantData").get("country"))
-                .enterZipCode(data.get("insurantData").get("zipcode"))
-                .enterCity(data.get("insurantData").get("city"))
-                .selectOccp(data.get("insurantData").get("occupation"))
-                .selectHobbies(data.get("insurantData").get("Hobbies"))
+    public ProductDataScreen populateAllDetailsForVehicle(Map<String, Map<String, String>> data) {
+
+        enterInsurantDataPage.enterFirstName(data.get(TestData.INSURANT_DATA).get("firstName"))
+                .enterLastName(data.get(TestData.INSURANT_DATA).get("lastName"))
+                .enterDob(data.get(TestData.INSURANT_DATA).get("dateOfBirth"))
+                .checkGenderBtn(data.get(TestData.INSURANT_DATA).get("gender"))
+                .enterStreetAddrs(data.get(TestData.INSURANT_DATA).get("streetAddress"))
+                .selectCountry(data.get(TestData.INSURANT_DATA).get("country"))
+                .enterZipCode(data.get(TestData.INSURANT_DATA).get("zipcode"))
+                .enterCity(data.get(TestData.INSURANT_DATA).get("city"))
+                .selectOccp(data.get(TestData.INSURANT_DATA).get("occupation"))
+                .selectHobbies(data.get(TestData.INSURANT_DATA).get("Hobbies"))
                 .goToProductDataPage();
         ExtentLogger.info("All Fields are entered in Insurant Data Page");
         return new ProductDataScreen();
 
 
-
-
-
     }
+
 }

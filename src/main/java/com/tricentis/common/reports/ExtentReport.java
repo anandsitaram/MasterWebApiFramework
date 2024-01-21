@@ -5,6 +5,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.tricentis.common.constants.FrameworkConstants;
+import com.tricentis.common.exceptions.FrameworkException;
 import com.tricentis.common.exceptions.ValueNotFoundException;
 import com.tricentis.common.utils.ConfigReader;
 
@@ -28,11 +29,9 @@ public final class ExtentReport {
             File file = new File(FrameworkConstants.TEST_RESOURCE_PATH + "//extent-config.json");
             if (file.exists()) {
                 try {
-
-
-                    extentSparkReporter.loadJSONConfig(file);
+                   extentSparkReporter.loadJSONConfig(file);
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    throw new FrameworkException("Problem in setting up the extent report due to "+e.getMessage());
                 }
             } else {
 

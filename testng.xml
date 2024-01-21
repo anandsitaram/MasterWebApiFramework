@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Tricentis Testing" thread-count="2" parallel="tests">
+    <listeners>
+        <listener class-name="com.tricentis.common.listeners.ITestListenerImp"/>
+    </listeners>
+    <test name="Web Tricentis Testing - Chrome">
+        <parameter name="browser" value="CHROME"></parameter>
+        <classes>
+            <class name="com.web.EndToEndTest"/>
+        </classes>
+    </test>
+    <test name="Web Tricentis Testing - Edge">
+        <parameter name="browser" value="EDGE"></parameter>
+        <classes>
+            <class name="com.web.EndToEndTest"/>
+        </classes>
+    </test>
+    <test name="Api Testing">
+        <classes>
+            <class name="com.api.DemoTest"/>
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->

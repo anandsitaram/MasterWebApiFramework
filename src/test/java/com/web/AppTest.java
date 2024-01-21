@@ -68,22 +68,20 @@ public class AppTest extends BaseWebTest {
         InsurantDataScreen insurantDataScreen = vehicleDataScreen.populateAllDetailsForMotorCycle(data);
         Validate.assertThat("Verify whether Insurant Data Screen is Displayed", insurantDataScreen.getEnterInsurantDataPage().isInsurantPageDisplayed(), Matchers.equalTo(true));
 
-        ProductDataScreen productDataScreen = insurantDataScreen.populateAllDetailsForMotorCycle(data);
+        ProductDataScreen productDataScreen = insurantDataScreen.populateAllDetailsForVehicle(data);
         Validate.assertThat("Verify whether Product Data Screen is Displayed", productDataScreen.getEnterProductDataPage().isProductDataPageDisplayed(), Matchers.equalTo(true));
 
         PriceOptionScreen priceOptionScreen = productDataScreen.populateAllDetailsForMotorCycle(data);
         Validate.assertThat("Verify whether Price Option Data Screen is Displayed", priceOptionScreen.getEnterPriceOptionPage().isPriceOptionPageDisplayed(), Matchers.equalTo(true));
 
-        SendQuoteScreen sendQuoteScreen = priceOptionScreen.populateAllDetailsForMotorCycle(data.get("selectPrice").get("priceOption"));
+        SendQuoteScreen sendQuoteScreen = priceOptionScreen.populateAllDetailsForVehicle(data.get("selectPrice").get("priceOption"));
         Validate.assertThat("Verify whether Send Quote Page Screen is Displayed", sendQuoteScreen.getSendQuotePage().isSendQuotePageDisplayed(), Matchers.equalTo(true));
 
-        sendQuoteScreen.populateAllDetailsForMotorCycle(data);
+        sendQuoteScreen.populateAllDetailsForVehicle(data);
         Validate.assertThat("Verify whether Confirm pop up is Displayed", sendQuoteScreen.getSendQuotePage().isConfirmMailPopUpDisplayed(), Matchers.equalTo(true));
         Validate.assertThat("Verify Success message", sendQuoteScreen.getSendQuotePage().getSuccessMsgTxt(), Matchers.equalTo("Sending e-mail success!"));
 
         sendQuoteScreen.getSendQuotePage().clickConfrimBtn();
-
-
 
 
     }
