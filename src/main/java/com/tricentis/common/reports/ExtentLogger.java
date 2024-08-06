@@ -1,17 +1,15 @@
 package com.tricentis.common.reports;
 
+import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.CodeLanguage;
+import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.tricentis.common.constants.FrameworkConstants;
 import com.tricentis.common.utils.ConfigReader;
 import com.tricentis.web.drivers.DriverInstance;
 import io.restassured.http.Header;
-import io.restassured.http.Method;
-import io.restassured.response.Response;
-import io.restassured.specification.QueryableRequestSpecification;
-import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.SpecificationQuerier;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -20,82 +18,86 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public final class ExtentLogger {
-    private ExtentLogger() {
+public class ExtentLogger {
+    protected ExtentLogger() {
 
     }
 
-
-    public static void fail(String message) {
-
-        if (ConfigReader.isFailedStepLogger()) {
-            if (ConfigReader.isFailedStepScreenShot()) {
-                ExtentThLocal.getExtentTest().fail(message, MediaEntityBuilder.createScreenCaptureFromPath(getBase64ScreenPath()).build());
-            } else {
-                ExtentThLocal.getExtentTest().fail(message);
-            }
-        }
-
-    }
-
-    public static void fail(String message, boolean screenshot) {
-        if (screenshot) {
-            ExtentThLocal.getExtentTest().fail(message, MediaEntityBuilder.createScreenCaptureFromPath(getBase64ScreenPath()).build());
-        } else {
-            ExtentThLocal.getExtentTest().fail(message);
-        }
-
-
-    }
-
-    public static void pass(String message, boolean screenshot) {
-
-        if (screenshot) {
-            ExtentThLocal.getExtentTest().pass(message, MediaEntityBuilder.createScreenCaptureFromPath(getBase64ScreenPath()).build());
-        } else {
-            ExtentThLocal.getExtentTest().pass(message);
-        }
-
-
+    protected static ExtentTest getExtentTest() {
+        return ExtentThLocal.getExtentTest();
     }
 
     public static void info(String message) {
-        ExtentThLocal.getExtentTest().info(message);
+
+        getExtentTest().info(message);
     }
 
     public static void skip(String message) {
-        ExtentThLocal.getExtentTest().skip(message);
+        getExtentTest().skip(message);
     }
 
     public static void pass(String message) {
+        try {
+
         if (ConfigReader.isPassedStepLogger()) {
             if (ConfigReader.isPassedStepScreenShot()) {
-                ExtentThLocal.getExtentTest().pass(message, MediaEntityBuilder.createScreenCaptureFromPath(getBase64ScreenPath()).build());
+                logPassAndTakeScreenshot(message);
             } else {
-                ExtentThLocal.getExtentTest().pass(message);
+                logPass(message);
+            }
+        }
+        }
+        catch (Exception e){
+            logPass(message);
+        }
+    }
+
+    public static void passForValidations(String message) {
+        try {
+            if (ConfigReader.isPassedStepScreenShot()) {
+                logPassAndTakeScreenshot(message);
+            } else {
+                logPass(message);
             }
 
         }
-    }
+        catch (Exception e){
+            logPass(message);
+        }
+        }
 
-    private synchronized static String getBase64ScreenPath() {
-        File src = ((TakesScreenshot) DriverInstance.getDriver()).getScreenshotAs(OutputType.FILE);
+    public static void fail(String message) {
+
         try {
-            File dest = new File(FrameworkConstants.SCREENSHOT_PATH + System.currentTimeMillis() + ".png");
-
-            FileUtils.copyFile(src, dest);
-            return dest.getAbsolutePath();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            if (ConfigReader.isFailedStepScreenShot()) {
+                logFailAndTakeScreenshot(message);
+            } else {
+                logFail(message);
+            }
+        }
+        catch (Exception e){
+            logFail(message);
         }
     }
-
-    public static String getBase64ScreenShot() {
-        return ((TakesScreenshot) DriverInstance.getDriver()).getScreenshotAs(OutputType.BASE64);
+    private static void logFail(String message) {
+        getExtentTest().fail(message);
     }
 
+
+
+    private static void logPassAndTakeScreenshot(String message){
+        getExtentTest().pass(message, MediaEntityBuilder.createScreenCaptureFromPath(getBase64ScreenPath()).build());
+    }
+
+    private static void logPass(String message) {
+        getExtentTest().pass(message);
+    }
+
+    private static void logFailAndTakeScreenshot(String message){
+        getExtentTest().fail(message, MediaEntityBuilder.createScreenCaptureFromPath(getBase64ScreenPath()).build());
+    }
     public static void logJson(String json) {
-        ExtentThLocal.getExtentTest().info(MarkupHelper.createCodeBlock(json, CodeLanguage.JSON));
+        getExtentTest().info(MarkupHelper.createCodeBlock(json, CodeLanguage.JSON));
 
     }
 
@@ -103,35 +105,45 @@ public final class ExtentLogger {
 
         String[][] arrayHeaders = headersList.stream().map(header -> new String[]{header.getName(), header.getValue()})
                 .toArray(String[][]::new);
-        ExtentThLocal.getExtentTest().info(MarkupHelper.createTable(arrayHeaders));
+        getExtentTest().info(MarkupHelper.createTable(arrayHeaders));
 
 
     }
 
-    public static void logRequest(RequestSpecification requestSpecification) {
 
-        QueryableRequestSpecification queryableRequestSpecification = SpecificationQuerier.query(requestSpecification);
-        info("Endpoint is " + queryableRequestSpecification.getURI());
-        info("Method is " + queryableRequestSpecification.getMethod());
-        info("Headers are");
-        logHeaders(queryableRequestSpecification.getHeaders().asList());
-        System.out.println(!queryableRequestSpecification.getMethod().equals(Method.DELETE.name()));
-        if(!queryableRequestSpecification.getMethod().equals(Method.GET.name())&&
-                !queryableRequestSpecification.getMethod().equals(Method.DELETE.name())){
-            info("Request body is ");
-            logJson(queryableRequestSpecification.getBody());
+    protected static synchronized String getBase64ScreenPath() {
+        try {
+        File src = ((TakesScreenshot) DriverInstance.getDriver()).getScreenshotAs(OutputType.FILE);
+
+            File dest = new File(FrameworkConstants.SCREENSHOT_PATH + System.currentTimeMillis() + ".png");
+
+            FileUtils.copyFile(src, dest);
+            return dest.getAbsolutePath();
+        } catch (IOException e) {
+            throw new RuntimeException("Problem in taking screenshot due to "+e.getMessage());
         }
-        else{
-            info("No Request body as it is "+queryableRequestSpecification.getMethod()+" Request");
-        }
+    }
+
+    protected static String getBase64ScreenShot() {
+        return ((TakesScreenshot) DriverInstance.getDriver()).getScreenshotAs(OutputType.BASE64);
+    }
+
+
+    public static void failStatus(String message) {
+
+        getExtentTest().log(Status.FAIL,MarkupHelper.createLabel(message, ExtentColor.RED));
+
+    }
+    public static void passStatus(String message) {
+
+            getExtentTest().log(Status.PASS,MarkupHelper.createLabel(message, ExtentColor.GREEN));
 
     }
 
-    public static void logResponse(Response response) {
-        info("Response status is " + response.getStatusCode());
-        info("Response Headers are ");
-        logHeaders(response.getHeaders().asList());
-        info("Response body is ");
-        logJson(response.getBody().prettyPrint());
+    public static void skipStatus(String message) {
+
+        getExtentTest().log(Status.SKIP,MarkupHelper.createLabel(message, ExtentColor.ORANGE));
+
     }
+
 }

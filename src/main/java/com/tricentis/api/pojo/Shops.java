@@ -23,7 +23,7 @@ public class Shops {
 
     private String name;
 
-    public static Shops buildRandomRequest(){
+    public static Shops buildRandomRequest() {
 
         return Shops.builder()
                 .id(RandomUtil.getRandomNumber(1))
@@ -33,20 +33,21 @@ public class Shops {
                 .build();
 
     }
-    public static Shops buildRequest(Map<String,Object> data){
+
+    public static Shops buildRequest(Map<String, Object> data) {
         ShopsBuilder shopsBuilder = Shops.builder();
 
-        if(Objects.nonNull(data.get("id"))){
-            shopsBuilder= shopsBuilder.id((Long)data.get("id"));
+        if (Objects.nonNull(data.get("id"))) {
+            shopsBuilder = shopsBuilder.id((Long) data.get("id"));
         }
-        if(Objects.nonNull(data.get("city"))){
-            shopsBuilder= shopsBuilder.city(data.get("city").toString());
+        if (Objects.nonNull(data.get("city"))) {
+            shopsBuilder = shopsBuilder.city(data.get("city").toString());
         }
-        if(Objects.nonNull(data.get("country"))){
-            shopsBuilder= shopsBuilder.country(data.get("country").toString());
+        if (Objects.nonNull(data.get("country"))) {
+            shopsBuilder = shopsBuilder.country(data.get("country").toString());
         }
-        if(Objects.nonNull(data.get("name"))){
-            shopsBuilder= shopsBuilder.name(data.get("name").toString());
+        if (Objects.nonNull(data.get("name"))) {
+            shopsBuilder = shopsBuilder.name(data.get("name").toString());
         }
         return shopsBuilder.build();
 

@@ -5,7 +5,6 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.tricentis.common.constants.FrameworkConstants;
-import com.tricentis.common.exceptions.ValueNotFoundException;
 import com.tricentis.common.utils.ConfigReader;
 
 import java.io.File;
@@ -28,11 +27,9 @@ public final class ExtentReport {
             File file = new File(FrameworkConstants.TEST_RESOURCE_PATH + "//extent-config.json");
             if (file.exists()) {
                 try {
-
-
-                    extentSparkReporter.loadJSONConfig(file);
+                   extentSparkReporter.loadJSONConfig(file);
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    throw new RuntimeException("Problem in setting up the extent report due to "+e.getMessage());
                 }
             } else {
 
@@ -54,7 +51,6 @@ public final class ExtentReport {
     }
 
     public static void createTestNode(String testName) {
-
         ExtentTest extentTest = extentReports.createTest(testName);
         ExtentThLocal.setExtentTest(extentTest);
     }
@@ -66,7 +62,7 @@ public final class ExtentReport {
             } else {
                 return FrameworkConstants.EXTENTREPORT_PATH + "Report_" + System.currentTimeMillis() + ".html";
             }
-        } catch (ValueNotFoundException e) {
+        } catch (RuntimeException e) {
             return FrameworkConstants.EXTENTREPORT_PATH + "Report.html";
 
         }

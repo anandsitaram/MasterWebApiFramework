@@ -6,22 +6,25 @@ import com.tricentis.web.pages.EnterPriceOptionPage;
 public class PriceOptionScreen {
     private EnterPriceOptionPage enterPriceOptionPage;
 
-    public PriceOptionScreen(){
+    public PriceOptionScreen() {
 
-        enterPriceOptionPage= new EnterPriceOptionPage();
+        enterPriceOptionPage = new EnterPriceOptionPage();
 
     }
+
     public EnterPriceOptionPage getEnterPriceOptionPage() {
         return enterPriceOptionPage;
     }
-    public SendQuoteScreen populateAllDetailsForMotorCycle(String price){
+
+    public SendQuoteScreen populateAllDetailsForVehicle(String price) {
 
         enterPriceOptionPage.selectPriceOption(price)
                 .goToSendQuotePage();
-        ExtentLogger.info(price+"is selected in Enter Price Option page");
+        ExtentLogger.passStatus(price + " is selected in Enter Price Option page");
         return new SendQuoteScreen();
 
 
-
     }
+
+
 }

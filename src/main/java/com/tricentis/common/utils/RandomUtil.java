@@ -12,8 +12,8 @@ public final class RandomUtil {
     }
 
 
-    private final static char[] LETTERS = "abcdefghijkmnopqrstuvwxyz".toCharArray();
-    private final static char[] NUMBERS = "0123456789".toCharArray();
+    private static final char[] LETTERS = "abcdefghijkmnopqrstuvwxyz".toCharArray();
+    private static final char[] NUMBERS = "0123456789".toCharArray();
 
     private static String getRandom(int size, char[] chars) {
 
@@ -34,15 +34,15 @@ public final class RandomUtil {
         return stringBuilder.toString();
     }
 
-    public static String getRandomString(int length){
+    public static String getRandomString(int length) {
 
-        return getRandom(length,LETTERS);
+        return getRandom(length, LETTERS);
 
     }
 
-    public static Long getRandomNumber(int length){
+    public static Long getRandomNumber(int length) {
 
-        return Long.valueOf(getRandom(length,NUMBERS));
+        return Long.valueOf(getRandom(length, NUMBERS));
 
     }
 

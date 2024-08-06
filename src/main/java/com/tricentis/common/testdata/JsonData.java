@@ -1,132 +1,92 @@
 package com.tricentis.common.testdata;
 
 import com.tricentis.common.constants.FrameworkConstants;
+import com.tricentis.common.exceptions.FrameworkException;
 import com.tricentis.common.exceptions.ValueNotFoundException;
+import com.tricentis.common.utils.ConfigReader;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public final class JsonData {
 
-    private static JsonData webJsonData;
-
-    private static JsonData apiJsonData;
-    private static String webTestData=FrameworkConstants.WEB_TESTDATA_FILE;
-
-    private static String apiTestData= FrameworkConstants.API_TESTDATA_FILE;
-    private JsonData(){
+    private JsonData() {
 
     }
 
-    private static JsonData getWebFileInstance(String file){
+    private static JSONParser jsonParser = new JSONParser();
 
-        if(!file.equalsIgnoreCase(webTestData)){
-            webJsonData=null;
-            webTestData=file;
-        }
-        if(Objects.isNull(webJsonData)){
-            webJsonData= new JsonData();
-        }
-        return webJsonData;
 
-    }
+    public synchronized static Map<String, Map<String, String>> readTestData(String keyValue) {
 
-    private static JsonData getApiFileInstance(String file){
-
-        if(!file.equalsIgnoreCase(apiTestData)){
-            apiJsonData=null;
-            apiTestData=file;
-        }
-        if(Objects.isNull(apiJsonData)){
-            apiJsonData= new JsonData();
-        }
-        return apiJsonData;
-
-    }
-    public static Map<String, Map<String, String>> readTestData(String keyValue){
-
-        getWebFileInstance(FrameworkConstants.WEB_TESTDATA_FILE);
-        System.out.println(webJsonData.hashCode());
-        JSONParser jsonParser = new JSONParser();
         try {
-            Object obj = jsonParser.parse(new FileReader(FrameworkConstants.WEB_TESTDATA_PATH));
-            JSONObject jsonObject=(JSONObject)obj;
-            if(!jsonObject.containsKey(keyValue)){
+            Object obj = jsonParser.parse(new FileReader(FrameworkConstants.TESTDATA_PATH + File.separator + ConfigReader.getJsonDataFile() + ".json"));
+            JSONObject jsonObject = (JSONObject) obj;
+            if (!jsonObject.containsKey(keyValue)) {
                 throw new ValueNotFoundException("Key not present in the test data file");
             }
-            JSONObject testDataKey = (JSONObject)jsonObject.get(keyValue);
-            Map<String, Map<String,String>>data= new HashMap<>();
+            JSONObject testDataKey = (JSONObject) jsonObject.get(keyValue);
+            Map<String, Map<String, String>> data = new HashMap<>();
             for (Object key : testDataKey.keySet()) {
-                String keyStr = (String)key;
+                String keyStr = (String) key;
                 JSONObject keyvalue = (JSONObject) testDataKey.get(keyStr);
-                Map<String,String> temp= new HashMap<>();
+                Map<String, String> temp = new HashMap<>();
 
                 keyvalue.keySet().forEach(keyStr1 ->
                 {
                     Object keyvalue1 = keyvalue.get(keyStr1);
-                    temp.put(keyStr1.toString(),keyvalue1.toString());
+                    temp.put(keyStr1.toString(), keyvalue1.toString());
 
                 });
-                data.put(keyStr,temp);
+                data.put(keyStr, temp);
 
             }
             return data;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
+        } catch (IOException | ParseException e) {
+            throw new FrameworkException("Error in reading the json file due to" + e.getMessage());
+        }
+    }
+
+    public static Map<String, Map<String, String>> readTestData(String file, String keyValue) {
+
+
+        try {
+            Object obj = jsonParser.parse(new FileReader(FrameworkConstants.TESTDATA_PATH + file + ".json"));
+            JSONObject jsonObject = (JSONObject) obj;
+            JSONObject testDataKey = (JSONObject) jsonObject.get(keyValue);
+            Map<String, Map<String, String>> data = new HashMap<>();
+            for (Object key : testDataKey.keySet()) {
+                String keyStr = (String) key;
+                JSONObject keyvalue = (JSONObject) testDataKey.get(keyStr);
+                Map<String, String> temp = new HashMap<>();
+
+                keyvalue.keySet().forEach(keyStr1 ->
+                {
+                    Object keyvalue1 = keyvalue.get(keyStr1);
+                    temp.put(keyStr1.toString(), keyvalue1.toString());
+
+                });
+                data.put(keyStr, temp);
+
+            }
+            return data;
+        } catch (IOException | ParseException e) {
+            throw new FrameworkException("Error in reading the json file due to " + e.getMessage());
         }
 
 
     }
 
-    public static Map<String, Map<String, String>> readTestData(String file,String keyValue){
+    public static Map<String, Object> readMapTestData(String fileName, String keyValue) {
 
-        getWebFileInstance(file);
-        System.out.println(webJsonData.hashCode());
-        JSONParser jsonParser = new JSONParser();
         try {
-            Object obj = jsonParser.parse(new FileReader(FrameworkConstants.TEST_RESOURCE_PATH+file+".json"));
-            JSONObject jsonObject=(JSONObject)obj;
-            JSONObject testDataKey = (JSONObject)jsonObject.get(keyValue);
-            Map<String, Map<String,String>>data= new HashMap<>();
-            for (Object key : testDataKey.keySet()) {
-                String keyStr = (String)key;
-                JSONObject keyvalue = (JSONObject) testDataKey.get(keyStr);
-                Map<String,String> temp= new HashMap<>();
-
-                keyvalue.keySet().forEach(keyStr1 ->
-                {
-                    Object keyvalue1 = keyvalue.get(keyStr1);
-                    temp.put(keyStr1.toString(),keyvalue1.toString());
-
-                });
-                data.put(keyStr,temp);
-
-            }
-            return data;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-
-
-    }
-
-    public static Map<String, Object> readMapTestData(String keyValue) {
-        getApiFileInstance(FrameworkConstants.API_TESTDATA_FILE);
-        System.out.println(apiJsonData.hashCode());
-        JSONParser jsonParser = new JSONParser();
-        try {
-            Object obj = jsonParser.parse(new FileReader(FrameworkConstants.API_TESTDATA_PATH));
+            Object obj = jsonParser.parse(new FileReader(FrameworkConstants.TESTDATA_PATH + File.separator + fileName + ".json"));
             JSONObject jsonObject = (JSONObject) obj;
             if (!jsonObject.containsKey(keyValue)) {
                 throw new ValueNotFoundException("Key not present in the test data file");
@@ -141,10 +101,10 @@ public final class JsonData {
 
             }
             return data;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
+        } catch (IOException | ParseException e) {
+            throw new FrameworkException("Error in reading the json file due to " + e.getMessage());
         }
     }
+
+
 }
