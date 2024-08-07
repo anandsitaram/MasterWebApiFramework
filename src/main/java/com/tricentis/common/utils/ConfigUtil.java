@@ -11,44 +11,44 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
 
+/**
+ * Utility class for reading configuration properties.
+ */
 public final class ConfigUtil {
 
     private ConfigUtil() {
-
+        // Private constructor to prevent instantiation
     }
 
-    private static Properties properties = new Properties();
+    private static final Properties properties = new Properties();
     private static final Map<String, String> CONFIGMAP = new HashMap<>();
 
     static {
-        BufferedReader reader;
-        try {
-            reader = new BufferedReader(new FileReader(FrameworkConstants.PROPERTY_PATH));
+        try (BufferedReader reader = new BufferedReader(new FileReader(FrameworkConstants.PROPERTY_PATH))) {
             properties.load(reader);
-            reader.close();
         } catch (IOException e) {
+            System.err.println("Error loading properties file: " + e.getMessage());
             System.exit(0);
         }
 
-
         for (Map.Entry<Object, Object> entry : properties.entrySet()) {
-
             CONFIGMAP.put(String.valueOf(entry.getKey()), String.valueOf(entry.getValue()));
-
         }
-
-
     }
 
-     static String getValue(String key) {
-
+    /**
+     * Retrieves the value associated with the given key from the configuration.
+     *
+     * @param key the configuration key
+     * @return the value associated with the key
+     * @throws ValueNotFoundException if the key is not present in the configuration
+     */
+    static String getValue(String key) {
         if (Objects.isNull(key) || Objects.isNull(CONFIGMAP.get(key))) {
             throw new ValueNotFoundException("Key not present in properties file");
         }
         return CONFIGMAP.get(key);
-
     }
-
 }
 
 
